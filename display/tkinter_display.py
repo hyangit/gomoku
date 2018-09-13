@@ -1,4 +1,3 @@
-import sys
 import threading
 import tkinter as tk
 import tkinter.messagebox as msgbox
@@ -31,7 +30,7 @@ class TkinterDisplay(Display):
 
     def mainloop(self):
         self.window.mainloop()
-        sys.exit(0)
+        self.exit=True
 
     # 画棋谱
     def _draw_board(self):

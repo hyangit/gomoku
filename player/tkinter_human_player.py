@@ -14,6 +14,8 @@ class TkinterHumanPlayer(Player):
         while True:
             # 等待用户点击
             time.sleep(0.1)
+            if self.game.display.exit:
+                exit(0)
             if self.location is not None:
                 break
         x, y = self.location
