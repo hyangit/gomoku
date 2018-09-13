@@ -29,7 +29,7 @@ def custom_game():
     # 策略玩家自我对弈的动态效果
     board = ChessBoard()
     game = Game(board, None, None, None)
-    display = TkinterDisplay(game, 1)
+    display = TkinterDisplay(game, 0.5)
     player1 = PolicyPlayer(1, 2, game)
     player2 = PolicyPlayer(2, 1, game)
     game.display = display
@@ -40,6 +40,6 @@ def custom_game():
 
 # 游戏入口
 if __name__ == "__main__":
-    # custom_game()
+    custom_game()
     # policy_pk_policy_time_cost()
-    human_pk_policy()
+    # human_pk_policy()

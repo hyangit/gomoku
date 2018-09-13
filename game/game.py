@@ -1,6 +1,3 @@
-
-
-
 # 游戏
 class Game:
     def __init__(self, board, display, player1, player2):

@@ -1,4 +1,3 @@
-import sys
 import threading
 import tkinter as tk
 import tkinter.messagebox as msgbox
@@ -31,7 +30,7 @@ class TkinterDisplay(Display):
 
     def mainloop(self):
         self.window.mainloop()
-        sys.exit(0)
+        self.exit = True
 
     # 画棋谱
     def _draw_board(self):
@@ -59,11 +58,13 @@ class TkinterDisplay(Display):
             self.btn_text.set("继续")
 
     def _play(self):
-        if self.auto:
-            if not self.game.play():
-                threading.Timer(self.show_interval, self._play).start()
-            else:
-                self.show_game_over()
+        if not self.exit:
+            if self.auto:
+                if not self.game.play():
+                    self.step += 1
+                    threading.Timer(self.show_interval, self._play).start()
+                else:
+                    self.show_game_over()
 
     # 画棋子
     def _draw_piece(self, player, x, y):
@@ -92,9 +93,9 @@ class TkinterDisplay(Display):
         self.auto = False
         self.btn_start['state'] = 'disabled'
         if self.win_player is not None:
-            msgbox.showinfo("游戏结束", str(self.win_player) + " 赢了！")
+            msgbox.showinfo("游戏结束", str(self.win_player) + " 赢了！共走步数：" + str(self.step))
         else:
-            msgbox.showinfo("游戏结束", "平局！")
+            msgbox.showinfo("游戏结束", "平局！共走步数：" + str(self.step))
 
     # 通过画布坐标转换成落子位置
     def parse_location(self, left, top):
