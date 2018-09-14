@@ -40,6 +40,6 @@ def custom_game():
 
 # 游戏入口
 if __name__ == "__main__":
-    custom_game()
+    # custom_game()
     # policy_pk_policy_time_cost()
-    # human_pk_policy()
+    human_pk_policy()
