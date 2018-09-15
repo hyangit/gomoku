@@ -6,7 +6,4 @@ from .player import Player
 class RandomPlayer(Player):
     def get_next_location(self):
         # 生成随机落子位置
-        while True:
-            location = np.random.randint(0, self.game.board.width, 2, dtype=np.int8)
-            if self.game.board.validate(location):
-                return location
+        return self.game.board.available_location[np.random.randint(0, len(self.game.board.available_location))]

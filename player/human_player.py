@@ -9,7 +9,7 @@ class HumanPlayer(Player):
             try:
                 if isinstance(location, str):
                     location = [int(n, 10) for n in location.split(",")]
-                if self.game.board.validate(location):
+                if len(location) == 2 and self.game.board.validate(location):
                     return location
             except:
                 pass

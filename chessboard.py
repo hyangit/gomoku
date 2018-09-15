@@ -10,20 +10,23 @@ class ChessBoard:
         self.state = state
         if state is None:
             self.state = np.zeros([width, height], dtype=np.byte)
+        self.available_location = [(x, y) for x in range(width) for y in range(height) if self.state[x, y] == 0]
 
     # 落子，返回 是否结束
     def put_piece(self, player, location):
         if not self.validate(location):
-            raise Exception("location error")
+            raise Exception("location error" + str(location))
         x, y = location
         self.state[x, y] = player.index
+        self.available_location.remove(location)
         return self._is_done(player, x, y)
 
     # 是否可以落子
     def validate(self, location):
-        if len(location) != 2:
-            return False
-        x, y = location
+        try:
+            x, y = location
+        except Exception as e:
+            raise e
         return 0 <= x < self.width and 0 <= y < self.height and self.state[x, y] == 0
 
     # 棋盘已满
